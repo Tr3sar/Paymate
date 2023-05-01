@@ -1,7 +1,8 @@
-package dadm.jmartor.paymate
+package dadm.jmartor.paymate.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import dadm.jmartor.paymate.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
