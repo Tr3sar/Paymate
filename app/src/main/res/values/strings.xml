@@ -4,4 +4,8 @@
     <string name="registerTitle">Register</string>
     <string name="groupsTitle">Groups</string>
     <string name="newGroupTitle">Get a new Group!</string>
+    <string name="usernameHint">Username</string>
+    <string name="passwordHint">Password</string>
+    <string name="registerMessage">¿Aún no tienes una cuenta? ¡Regístrate ahora!</string>
+    <string name="loginMessage">¿Ya tienes una cuenta? Inicia sesión ahora.</string>
 </resources>
