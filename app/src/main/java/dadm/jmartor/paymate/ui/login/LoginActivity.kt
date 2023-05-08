@@ -3,7 +3,6 @@ package dadm.jmartor.paymate.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.ActivityLoginBinding
 import dadm.jmartor.paymate.ui.register.RegisterActivity
 
@@ -16,7 +15,7 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        binding.btnLogin.setOnClickListener() {
+        binding.tvRegister.setOnClickListener() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
