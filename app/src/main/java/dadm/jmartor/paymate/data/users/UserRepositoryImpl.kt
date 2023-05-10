@@ -13,4 +13,11 @@ class UserRepositoryImpl @Inject constructor(
         } else {
             Result.failure(NoInternetException())
         }
+
+    override suspend fun register(username: String, password: String): Result<Unit> =
+        if (connectivityChecker.isConnectionAvailable()) {
+             dataSource.register(username, password)
+        } else {
+             Result.failure(NoInternetException())
+        }
 }

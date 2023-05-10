@@ -9,4 +9,8 @@ class UserDataSourceImpl @Inject constructor() : UserDataSource {
         val userLogged = User("Josep", "contra")
         return Result.success(userLogged)
     }
+
+    override suspend fun register(username: String, password: String): Result<Unit> {
+        return Result.success(Unit)
+    }
 }

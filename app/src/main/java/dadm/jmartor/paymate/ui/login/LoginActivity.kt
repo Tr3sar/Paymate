@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
                     else -> {
                         Snackbar.make(
                             binding.root,
-                            R.string.quotationError,
+                            R.string.loginError,
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
