@@ -1,4 +1,4 @@
-package dadm.jmartor.paymate.ui.groups
+package dadm.jmartor.paymate.ui.group
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView

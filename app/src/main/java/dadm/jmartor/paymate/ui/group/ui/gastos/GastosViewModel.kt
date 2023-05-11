@@ -1,13 +1,13 @@
-package dadm.jmartor.paymate.ui.groups.ui.deudas
+package dadm.jmartor.paymate.ui.group.ui.gastos
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DeudasViewModel : ViewModel() {
+class GastosViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
 }

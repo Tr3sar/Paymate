@@ -1,4 +1,4 @@
-package dadm.jmartor.paymate.ui.groups.ui.deudas
+package dadm.jmartor.paymate.ui.group.ui.gastos
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import dadm.jmartor.paymate.databinding.FragmentDeudasBinding
+import dadm.jmartor.paymate.databinding.FragmentGastosBinding
 
-class DeudasFragment : Fragment() {
+class GastosFragment : Fragment() {
 
-    private var _binding: FragmentDeudasBinding? = null
+    private var _binding: FragmentGastosBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,16 +22,12 @@ class DeudasFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(DeudasViewModel::class.java)
+        val gastosViewModel =
+            ViewModelProvider(this).get(GastosViewModel::class.java)
 
-        _binding = FragmentDeudasBinding.inflate(inflater, container, false)
+        _binding = FragmentGastosBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 

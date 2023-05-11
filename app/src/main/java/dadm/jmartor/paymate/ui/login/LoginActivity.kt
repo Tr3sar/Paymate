@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.ActivityLoginBinding
-import dadm.jmartor.paymate.ui.groups.GrupoActivity
+import dadm.jmartor.paymate.ui.group.GrupoActivity
 import dadm.jmartor.paymate.ui.register.RegisterActivity
 import dadm.jmartor.paymate.utils.NoInternetException
 import dagger.hilt.android.AndroidEntryPoint
