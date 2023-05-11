@@ -11,4 +11,8 @@
     <string name="internetException">No hay conexión a internet. Vuelve a intentarlo en un rato.</string>
     <string name="loginError">Error iniciando sesión, compruebe sus credenciales y vuelva a intentarlo.</string>
     <string name="registerError">Error registrando al usuario, vuelve a intentarlo más tarde.</string>
+    <string name="title_activity_grupo">GrupoActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

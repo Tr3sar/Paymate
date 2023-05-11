@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_gastos">
+
+    <fragment
+        android:id="@+id/navigation_gastos"
+        android:name="dadm.jmartor.paymate.ui.groups.ui.gastos.GastosFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_gastos" />
+
+    <fragment
+        android:id="@+id/navigation_deudas"
+        android:name="dadm.jmartor.paymate.ui.groups.ui.deudas.DeudasFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_deudas" />
+</navigation>

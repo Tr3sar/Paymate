@@ -16,6 +16,10 @@
         android:theme="@style/Theme.Paymate"
         tools:targetApi="31">
         <activity
+            android:name=".ui.groups.GrupoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_grupo" />
+        <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
         <activity
