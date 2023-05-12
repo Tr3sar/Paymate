@@ -1,13 +1,16 @@
 package dadm.jmartor.paymate.ui.register
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dadm.jmartor.paymate.data.users.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class RegisterViewModel @Inject constructor(var userRepository: UserRepository) : ViewModel() {
     private val _registerResult = MutableLiveData<Boolean>()
     private val _containsErrors : MutableLiveData<Throwable?> = MutableLiveData<Throwable?>()
@@ -16,8 +19,6 @@ class RegisterViewModel @Inject constructor(var userRepository: UserRepository) 
     val containsErrors: LiveData<Throwable?> get() = _containsErrors
 
     fun register(username: String, password: String) {
-        _registerResult.value = true
-
         viewModelScope.launch {
             userRepository.register(username, password).fold(onSuccess = {
                 _registerResult.value = it != null

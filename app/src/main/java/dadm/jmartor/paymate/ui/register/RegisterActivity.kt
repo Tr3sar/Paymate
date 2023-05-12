@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.ActivityRegisterBinding
+import dadm.jmartor.paymate.ui.group.GrupoActivity
 import dadm.jmartor.paymate.ui.login.LoginActivity
 import dadm.jmartor.paymate.ui.login.LoginViewModel
 import dadm.jmartor.paymate.utils.NoInternetException
@@ -41,6 +42,17 @@ class RegisterActivity : AppCompatActivity() {
         binding.tvLogin.setOnClickListener() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+        }
+
+        viewModel.registerResult.observe(this) { registerResult ->
+            if (registerResult) {
+                val intent = Intent(this, GrupoActivity::class.java)
+                startActivity(intent)
+
+                Snackbar.make(binding.root, "Registro correcto", Snackbar.LENGTH_SHORT).show()
+            } else {
+                Snackbar.make(binding.root, "Ya existe un usuario con este nombre de usuario", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         viewModel.containsErrors.observe(this) {error ->
