@@ -10,4 +10,8 @@
     <string name="loginMessage">¿Ya tienes una cuenta? Inicia sesión ahora.</string>
     <string name="internetException">No hay conexión a internet. Vuelve a intentarlo en un rato.</string>
     <string name="quotationError">Error iniciando sesión, compruebe sus credenciales y vuelva a intentarlo.</string>
+    <string name="nameMember">Nombre</string>
+    <string name="groupName">Nombre del grupo</string>
+    <string name="addMember">+</string>
+    <string name="group_create_button">Crear grupo</string>
 </resources>
