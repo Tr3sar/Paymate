@@ -1,5 +1,6 @@
 package dadm.jmartor.paymate.ui.login
 
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,11 +21,14 @@ class LoginViewModel @Inject constructor(var userRepository: UserRepository) : V
     val containsErrors: LiveData<Throwable?> get() = _containsErrors
 
     fun login(username: String, password: String) {
-        _loginResult.value = true
-
         viewModelScope.launch {
             userRepository.login(username, password).fold(onSuccess = {
-                _loginResult.value = it != null
+                if (it.username == "error" && it.password == "error") {
+                    _containsErrors.value = Throwable("Credenciales incorrectos.")
+                    _loginResult.value = false
+                } else {
+                    _loginResult.value = true
+                }
             }, onFailure = {
                 _containsErrors.value = it
                 _loginResult.value = false
