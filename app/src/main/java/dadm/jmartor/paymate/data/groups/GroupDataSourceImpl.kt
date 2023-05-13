@@ -16,7 +16,7 @@ class GroupDataSourceImpl @Inject constructor(var retrofit: Retrofit): GroupData
 
     interface GroupRetrofit{
 
-        @POST("create")
+        @POST("group/create")
         suspend fun create(@Body groupDto: GroupDto): Response<Unit>
     }
 
