@@ -13,3 +13,11 @@ fun Response<GroupDto>.toDomain() =
 fun Response<Unit>.toUnitDomain() =
     if (isSuccessful) Result.success(Unit)
     else Result.failure(IOException())
+
+
+fun Response<List<GroupDto>>.toDomainList() =
+    if (isSuccessful) {
+        val groupDto = body()?.map{ it.toDomain() } ?: emptyList()
+        Result.success(groupDto)
+    }
+    else Result.failure(IOException())
