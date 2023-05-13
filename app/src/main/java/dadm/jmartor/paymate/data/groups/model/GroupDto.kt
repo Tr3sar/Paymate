@@ -3,7 +3,6 @@ package dadm.jmartor.paymate.data.groups.model
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class GroupDto (
-    val id: Long,
-    val name: String
-    )
+data class GroupDto (val id: Long, val name: String){
+    constructor(name: String) : this(0, name)
+}

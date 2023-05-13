@@ -2,6 +2,8 @@ package dadm.jmartor.paymate.di
 
 import dadm.jmartor.paymate.data.groups.GroupDataSource
 import dadm.jmartor.paymate.data.groups.GroupDataSourceImpl
+import dadm.jmartor.paymate.data.groups.GroupRepository
+import dadm.jmartor.paymate.data.groups.GroupRepositoryImpl
 import dadm.jmartor.paymate.data.users.UserDataSource
 import dadm.jmartor.paymate.data.users.UserDataSourceImpl
 import dadm.jmartor.paymate.data.users.UserRepository
