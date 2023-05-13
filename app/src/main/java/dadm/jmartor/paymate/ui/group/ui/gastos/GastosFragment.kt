@@ -6,31 +6,41 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
+import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.FragmentGastosBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GastosFragment : Fragment() {
+class GastosFragment : Fragment(R.layout.fragment_gastos) {
 
     private var _binding: FragmentGastosBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        val gastosViewModel =
-            ViewModelProvider(this).get(GastosViewModel::class.java)
+    private val viewModel: GastosViewModel by activityViewModels()
 
-        _binding = FragmentGastosBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    private val itemClicked = object : ItemClicked {
+        override fun onClick() {
+            Snackbar.make(binding.root, "No ha sido implementado aún", Snackbar.LENGTH_SHORT).show()
+        }
+    }
 
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        _binding = FragmentGastosBinding.bind(view)
+
+        val adapter = ExpenseListAdapter(itemClicked)
+        binding.recyclerViewGastos.adapter = adapter
+
+        viewModel.getExpensesList()
+
+        viewModel.expensesList.observe(viewLifecycleOwner) {expenseList ->
+            adapter.submitList(expenseList)
+        }
     }
 
     override fun onDestroyView() {

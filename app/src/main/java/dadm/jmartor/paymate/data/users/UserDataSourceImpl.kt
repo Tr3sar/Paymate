@@ -2,7 +2,6 @@ package dadm.jmartor.paymate.data.users
 
 import android.util.Log
 import dadm.jmartor.paymate.data.users.model.UserDto
-import dadm.jmartor.paymate.ui.domain.model.User
 import okhttp3.MediaType
 import okhttp3.ResponseBody
 import retrofit2.Response
