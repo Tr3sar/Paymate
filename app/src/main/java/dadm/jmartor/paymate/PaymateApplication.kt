@@ -5,4 +5,5 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class PaymateApplication : Application(){
+    var username: String? = null
 }

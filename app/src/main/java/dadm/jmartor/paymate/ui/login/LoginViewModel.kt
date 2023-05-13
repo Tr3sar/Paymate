@@ -1,5 +1,6 @@
 package dadm.jmartor.paymate.ui.login
 
+import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -7,13 +8,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.snackbar.Snackbar
+import dadm.jmartor.paymate.PaymateApplication
 import dadm.jmartor.paymate.data.users.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(var userRepository: UserRepository) : ViewModel() {
+class LoginViewModel @Inject constructor(
+    @ApplicationContext private val application: Context,
+    var userRepository: UserRepository
+    ) : ViewModel() {
+
     private val _loginResult = MutableLiveData<Boolean>()
     private val _containsErrors: MutableLiveData<Throwable?> = MutableLiveData<Throwable?>()
 
@@ -27,6 +34,8 @@ class LoginViewModel @Inject constructor(var userRepository: UserRepository) : V
                     _containsErrors.value = Throwable("Credenciales incorrectos.")
                     _loginResult.value = false
                 } else {
+                    val paymateApplication = application as PaymateApplication
+                    paymateApplication.username = it.username
                     _loginResult.value = true
                 }
             }, onFailure = {

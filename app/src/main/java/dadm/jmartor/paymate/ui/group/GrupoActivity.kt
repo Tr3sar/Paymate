@@ -9,7 +9,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.ActivityGrupoBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GrupoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGrupoBinding
