@@ -21,11 +21,11 @@ class GastosViewModel @Inject() constructor(
     val expensesList: LiveData<List<Expense>> get() = _expensesList
     val iconoVisible: LiveData<Boolean> get() = _iconoVisible
 
-    fun getExpensesList() {
+    fun getExpensesList(groupId: Long) {
         _iconoVisible.value = true
 
         viewModelScope.launch {
-            groupRepository.getExpensesFromGroup(5).fold(onSuccess = {
+            groupRepository.getExpensesFromGroup(groupId).fold(onSuccess = {
                 _expensesList.value = it
             }, onFailure = {
 

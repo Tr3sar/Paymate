@@ -39,7 +39,10 @@ class GastosFragment : Fragment(R.layout.fragment_gastos) {
         val adapter = ExpenseListAdapter(itemClicked)
         binding.recyclerViewGastos.adapter = adapter
 
-        getExpensesList()
+        val extras = requireActivity().intent.extras!!
+        val groupId : Long = extras.getLong("groupId")
+
+        getExpensesList(groupId)
 
         viewModel.expensesList.observe(viewLifecycleOwner) {expenseList ->
             adapter.submitList(expenseList)
@@ -53,7 +56,8 @@ class GastosFragment : Fragment(R.layout.fragment_gastos) {
 
         //refresh
         binding.swipeToRefresh.setOnRefreshListener() {
-            getExpensesList()
+            val groupId : Long = extras.getLong("groupId")
+            getExpensesList(groupId)
         }
 
         viewModel.iconoVisible.observe(viewLifecycleOwner) { iconoVisible ->
@@ -61,8 +65,8 @@ class GastosFragment : Fragment(R.layout.fragment_gastos) {
         }
     }
 
-    private fun getExpensesList() {
-        viewModel.getExpensesList()
+    private fun getExpensesList(groupId: Long) {
+        viewModel.getExpensesList(groupId)
     }
 
     override fun onDestroyView() {
