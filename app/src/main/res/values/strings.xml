@@ -27,4 +27,9 @@
     <string name="create_expense_title_hint">Ej.: Cena día 2</string>
     <string name="create_expense_quantity">Cantidad:</string>
     <string name="btn_crear">Crear</string>
+    <string name="pay_debt_button_text">Pagar deuda</string>
+    <string name="group_text">Grupo: </string>
+    <string name="amount_to_pay_text">Cantidad adeudada: </string>
+    <string name="pay_amount_hint">Cantidad del pago</string>
+    <string name="confirm_payment_button_text">Realizar pago</string>
 </resources>

@@ -1,16 +1,14 @@
 package dadm.jmartor.paymate.ui.group.ui.deudas
 
-import android.content.Context
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dadm.jmartor.paymate.PaymateApplication
 import dadm.jmartor.paymate.data.groups.GroupRepository
 import dadm.jmartor.paymate.data.users.UserRepository
 import dadm.jmartor.paymate.model.Debt
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,8 +22,11 @@ class DeudasViewModel @Inject constructor(
 
     val debtList : LiveData<List<Debt>> get() = _debtsList
 
-    fun getDebtsList() {
-        val groupId : Long = 1
+    private val _userDebt : MutableLiveData<Debt> = MutableLiveData<Debt>()
+
+    val userDebt : LiveData<Debt> get() = _userDebt
+
+    fun getDebtsList(groupId : Long, username : String) {
         val newList = mutableListOf<Debt>()
         viewModelScope.launch {
             groupRepository.getUsers(groupId).fold(onSuccess = { users ->
@@ -33,6 +34,10 @@ class DeudasViewModel @Inject constructor(
                     userRepository.getDebt(user.username, groupId).fold(onSuccess = {quantity ->
                         val debt : Debt = Debt(user.username, quantity)
                         newList.add(debt)
+
+                        if (user.username == username) {
+                            _userDebt.value = debt
+                        }
                     }, onFailure = {
 
                     })

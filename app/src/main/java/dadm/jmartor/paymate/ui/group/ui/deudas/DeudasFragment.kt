@@ -1,12 +1,15 @@
 package dadm.jmartor.paymate.ui.group.ui.deudas
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.snackbar.Snackbar
 import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.FragmentDeudasBinding
+import dadm.jmartor.paymate.ui.pagardeuda.PagarDeudaActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,10 +34,28 @@ class DeudasFragment : Fragment(R.layout.fragment_deudas) {
         val adapter = DebtListAdapter(itemClicked)
         binding.recyclerViewDeudas.adapter = adapter
 
-        viewModel.getDebtsList()
+        viewModel.getDebtsList(1, "Bob")
 
         viewModel.debtList.observe(viewLifecycleOwner) {debtList ->
             adapter.submitList(debtList)
+        }
+
+        val payDebtButton: Button = view.findViewById(R.id.payDebtButton)
+
+        viewModel.userDebt.observe(viewLifecycleOwner) {userDebt ->
+            if (userDebt == null || userDebt.quantity <= 0) {
+                payDebtButton.isEnabled = false
+            } else {
+                payDebtButton.isEnabled = true
+                payDebtButton.setOnClickListener {
+                    val intent = Intent(activity, PagarDeudaActivity::class.java)
+                    intent.putExtra("username", "Bob")
+                    intent.putExtra("groupId", 1L)
+                    intent.putExtra("groupName", "grupo 1")
+                    intent.putExtra("quantity", userDebt.quantity)
+                    startActivity(intent)
+                }
+            }
         }
     }
 
