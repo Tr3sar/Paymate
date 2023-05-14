@@ -1,5 +1,6 @@
 package dadm.jmartor.paymate.data.users
 
+import dadm.jmartor.paymate.data.ConnectivityChecker
 import dadm.jmartor.paymate.data.users.model.toDomain
 import dadm.jmartor.paymate.data.users.model.toDoubleDomain
 import dadm.jmartor.paymate.data.users.model.toUnitDomain
@@ -9,7 +10,8 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
-    var dataSource: UserDataSource, var connectivityChecker: ConnectivityChecker) : UserRepository {
+    var dataSource: UserDataSource, var connectivityChecker: ConnectivityChecker
+) : UserRepository {
     override suspend fun login(username: String, password: String): Result<User> =
         if (connectivityChecker.isConnectionAvailable()) {
             dataSource.login(username, password).toDomain()

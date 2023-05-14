@@ -1,4 +1,4 @@
-package dadm.jmartor.paymate.data.users
+package dadm.jmartor.paymate.data
 
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
