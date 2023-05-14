@@ -27,11 +27,14 @@ class DeudasViewModel @Inject constructor(
     val debtList : LiveData<List<Debt>> get() = _debtsList
 
     private val _userDebt : MutableLiveData<Debt> = MutableLiveData<Debt>()
+    private val _iconoVisible: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
 
     val userDebt : LiveData<Debt> get() = _userDebt
+    val iconoVisible: LiveData<Boolean> get() = _iconoVisible
 
     fun getDebtsList(groupId : Long) {
         val newList = mutableListOf<Debt>()
+        _iconoVisible.value = true
         viewModelScope.launch {
             groupRepository.getUsers(groupId).fold(onSuccess = { users ->
                 for (user in users) {
@@ -51,6 +54,7 @@ class DeudasViewModel @Inject constructor(
 
             })
         }
+        _iconoVisible.value = false
     }
 
     fun getUserName() : String {
