@@ -22,7 +22,8 @@ class GroupListActivity : AppCompatActivity() {
 
         override fun onClick(Group: Group) {
             val intent = Intent(this@GroupListActivity, GrupoActivity::class.java)
-            intent.putExtra("grupoId", Group.id)
+            intent.putExtra("groupId", Group.id)
+            intent.putExtra("groupName", Group.name)
             startActivity(intent)
         }
     }

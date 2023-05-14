@@ -34,7 +34,12 @@ class DeudasFragment : Fragment(R.layout.fragment_deudas) {
         val adapter = DebtListAdapter(itemClicked)
         binding.recyclerViewDeudas.adapter = adapter
 
-        viewModel.getDebtsList(1, "Bob")
+        val extras = requireActivity().intent.extras!!
+        val groupId : Long = extras.getLong("groupId")
+        val groupName : String = extras.getString("groupName").toString()
+        val username : String = viewModel.getUserName()
+
+        viewModel.getDebtsList(groupId)
 
         viewModel.debtList.observe(viewLifecycleOwner) {debtList ->
             adapter.submitList(debtList)
@@ -49,9 +54,9 @@ class DeudasFragment : Fragment(R.layout.fragment_deudas) {
                 payDebtButton.isEnabled = true
                 payDebtButton.setOnClickListener {
                     val intent = Intent(activity, PagarDeudaActivity::class.java)
-                    intent.putExtra("username", "Bob")
-                    intent.putExtra("groupId", 1L)
-                    intent.putExtra("groupName", "grupo 1")
+                    intent.putExtra("username", username)
+                    intent.putExtra("groupId", groupId)
+                    intent.putExtra("groupName", groupName)
                     intent.putExtra("quantity", userDebt.quantity)
                     startActivity(intent)
                 }

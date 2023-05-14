@@ -1,19 +1,23 @@
 package dadm.jmartor.paymate.ui.group.ui.deudas
 
+import android.content.Context
 import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dadm.jmartor.paymate.PaymateApplication
 import dadm.jmartor.paymate.data.groups.GroupRepository
 import dadm.jmartor.paymate.data.users.UserRepository
 import dadm.jmartor.paymate.model.Debt
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DeudasViewModel @Inject constructor(
+    @ApplicationContext private val application : Context,
     var groupRepository: GroupRepository,
     var userRepository: UserRepository
 ) : ViewModel() {
@@ -26,7 +30,7 @@ class DeudasViewModel @Inject constructor(
 
     val userDebt : LiveData<Debt> get() = _userDebt
 
-    fun getDebtsList(groupId : Long, username : String) {
+    fun getDebtsList(groupId : Long) {
         val newList = mutableListOf<Debt>()
         viewModelScope.launch {
             groupRepository.getUsers(groupId).fold(onSuccess = { users ->
@@ -35,7 +39,7 @@ class DeudasViewModel @Inject constructor(
                         val debt : Debt = Debt(user.username, quantity)
                         newList.add(debt)
 
-                        if (user.username == username) {
+                        if (user.username == getUserName()) {
                             _userDebt.value = debt
                         }
                     }, onFailure = {
@@ -47,5 +51,10 @@ class DeudasViewModel @Inject constructor(
 
             })
         }
+    }
+
+    fun getUserName() : String {
+        val paymateApplication = application as PaymateApplication
+        return paymateApplication.username.toString()
     }
 }
