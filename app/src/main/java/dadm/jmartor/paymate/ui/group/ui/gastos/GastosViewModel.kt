@@ -16,10 +16,14 @@ class GastosViewModel @Inject() constructor(
 ) : ViewModel() {
 
     private val _expensesList: MutableLiveData<List<Expense>> = MutableLiveData<List<Expense>>()
+    private val _iconoVisible: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
 
     val expensesList: LiveData<List<Expense>> get() = _expensesList
+    val iconoVisible: LiveData<Boolean> get() = _iconoVisible
 
     fun getExpensesList() {
+        _iconoVisible.value = true
+
         viewModelScope.launch {
             groupRepository.getExpensesFromGroup(5).fold(onSuccess = {
                 _expensesList.value = it
@@ -27,5 +31,7 @@ class GastosViewModel @Inject() constructor(
 
             })
         }
+
+        _iconoVisible.value = false
     }
 }
