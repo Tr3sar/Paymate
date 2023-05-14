@@ -36,11 +36,24 @@ class GastosFragment : Fragment(R.layout.fragment_gastos) {
         val adapter = ExpenseListAdapter(itemClicked)
         binding.recyclerViewGastos.adapter = adapter
 
-        viewModel.getExpensesList()
+        getExpensesList()
 
         viewModel.expensesList.observe(viewLifecycleOwner) {expenseList ->
             adapter.submitList(expenseList)
         }
+
+        //refresh
+        binding.swipeToRefresh.setOnRefreshListener() {
+            getExpensesList()
+        }
+
+        viewModel.iconoVisible.observe(viewLifecycleOwner) { iconoVisible ->
+            binding.swipeToRefresh.isRefreshing = iconoVisible
+        }
+    }
+
+    private fun getExpensesList() {
+        viewModel.getExpensesList()
     }
 
     override fun onDestroyView() {
