@@ -1,6 +1,4 @@
 import dadm.jmartor.paymate.data.groups.model.ExpenseDto
-import dadm.jmartor.paymate.data.groups.model.GroupDto
-import dadm.jmartor.paymate.data.groups.model.toDomain
 import dadm.jmartor.paymate.model.Expense
 import dadm.jmartor.paymate.model.Group
 import retrofit2.Response
