@@ -32,4 +32,5 @@
     <string name="amount_to_pay_text">Cantidad adeudada: </string>
     <string name="pay_amount_hint">Cantidad del pago</string>
     <string name="confirm_payment_button_text">Realizar pago</string>
+    <string name="create_expense_error">Ha ocurrido un error inesperado, vuelva a intentarlo más tarde.</string>
 </resources>

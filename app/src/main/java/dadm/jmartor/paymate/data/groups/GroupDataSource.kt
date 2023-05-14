@@ -1,7 +1,7 @@
 package dadm.jmartor.paymate.data.groups
 
 import dadm.jmartor.paymate.data.users.model.UserDto
-import dadm.jmartor.paymate.data.groups.model.ExpenseDto
+import dadm.jmartor.paymate.data.expenses.model.ExpenseDto
 import dadm.jmartor.paymate.data.groups.model.GroupDto
 import retrofit2.Response
 
