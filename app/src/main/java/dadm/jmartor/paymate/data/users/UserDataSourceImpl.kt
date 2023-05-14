@@ -6,10 +6,7 @@ import okhttp3.MediaType
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 import javax.inject.Inject
 
 class UserDataSourceImpl @Inject constructor(var retrofit: Retrofit) : UserDataSource {
@@ -22,6 +19,19 @@ class UserDataSourceImpl @Inject constructor(var retrofit: Retrofit) : UserDataS
 
         @POST("user/register")
         suspend fun register(@Body userDto: UserDto): Response<Unit>
+
+        @GET("user/debt_from_group")
+        suspend fun getDebt(
+            @Query("name") username: String,
+            @Query("groupId") idGroup: Long
+        ) : Response<Double>
+
+        @PUT("user/pay")
+        suspend fun payDebt(
+            @Query("name") username: String,
+            @Query("groupId") idGroup: Long,
+            @Query("money") quantity: Double
+        ) : Response<Unit>
     }
 
     override suspend fun login(username: String, password: String): Response<UserDto> =
@@ -42,6 +52,33 @@ class UserDataSourceImpl @Inject constructor(var retrofit: Retrofit) : UserDataS
             retrofitUserService.register(user)
         } catch (e: Exception) {
             Log.e("ERROR", "Error register UserDataSourceImpl")
+            Response.error(
+                400,
+                ResponseBody.create(MediaType.parse("text/plain"), e.toString())
+            )
+        }
+
+    override suspend fun getDebt(username: String, idGroup: Long): Response<Double> =
+        try{
+            retrofitUserService.getDebt(username, idGroup)
+        } catch (e: Exception) {
+            Log.e("ERROR", "Error getDebt UserDataSourceImpl")
+            Response.error(
+                400,
+                ResponseBody.create(MediaType.parse("text/plain"), e.toString())
+            )
+        }
+
+
+    override suspend fun payDebt(
+        username: String,
+        idGroup: Long,
+        quantity: Double
+    ): Response<Unit> =
+        try{
+            retrofitUserService.payDebt(username, idGroup, quantity)
+        } catch (e: Exception) {
+            Log.e("ERROR", "Error payDebt UserDataSourceImpl")
             Response.error(
                 400,
                 ResponseBody.create(MediaType.parse("text/plain"), e.toString())
