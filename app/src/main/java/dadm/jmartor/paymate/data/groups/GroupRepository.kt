@@ -1,9 +1,11 @@
 package dadm.jmartor.paymate.data.groups
 
+import dadm.jmartor.paymate.data.groups.model.GroupDto
 import dadm.jmartor.paymate.model.User
 
 import dadm.jmartor.paymate.model.Expense
 import dadm.jmartor.paymate.model.Group
+import retrofit2.Response
 
 interface GroupRepository {
 
@@ -16,4 +18,6 @@ interface GroupRepository {
     suspend fun addUser (groupId: Long, name: String) : Result<Unit>
 
     suspend fun getMyGroups(name: String) : Result<List<Group>>
+
+    suspend fun getAllGroups() : Result<List<Group>>
 }
