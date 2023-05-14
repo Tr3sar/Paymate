@@ -8,55 +8,51 @@
     <EditText
         android:id="@+id/groupName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/groupName"
-        app:layout_constraintBottom_toTopOf="@+id/members"
+        android:hint="@string/groupName"
+        app:layout_constraintBottom_toTopOf="@+id/personName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.388"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.394" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/personName"
+        android:layout_width="133dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/nameMember"
+        app:layout_constraintBottom_toTopOf="@+id/members"
+        app:layout_constraintEnd_toStartOf="@id/addMember"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/groupName" />
+
+    <Button
+        android:id="@+id/addMember"
+        android:layout_width="44dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="50dp"
+        android:text="@string/addMember"
+        app:layout_constraintTop_toBottomOf="@id/groupName"
+        app:layout_constraintBottom_toTopOf="@id/members"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/personName"
+        app:layout_constraintHorizontal_bias="0.5" />
 
     <TextView
         android:id="@+id/members"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="396dp"
+        android:layout_marginBottom="16dp"
         android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/createGroup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.22"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personName"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/addMember"
-        android:layout_width="44dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="56dp"
-        android:text="@string/addMember"
-        app:layout_constraintBottom_toTopOf="@+id/createGroup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.008"
-        app:layout_constraintStart_toEndOf="@+id/personName"
-        app:layout_constraintTop_toBottomOf="@+id/groupName"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/personName"
-        android:layout_width="133dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="76dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/nameMember"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="208dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/personName" />
 
     <Button
         android:id="@+id/createGroup"
@@ -69,3 +65,4 @@
         app:layout_constraintTop_toBottomOf="@+id/members" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

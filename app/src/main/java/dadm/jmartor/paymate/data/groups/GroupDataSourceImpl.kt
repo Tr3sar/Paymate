@@ -35,6 +35,9 @@ class GroupDataSourceImpl @Inject constructor(var retrofit: Retrofit): GroupData
 
         @GET("group/get_all_my_groups")
         suspend fun getMyGroups(@Query("userName") name: String) : Response<List<GroupDto>>
+
+        @GET("group/all")
+        suspend fun getAllGroups() : Response<List<GroupDto>>
     }
 
     override suspend fun create(name: String): Response<Unit> =
@@ -85,6 +88,17 @@ class GroupDataSourceImpl @Inject constructor(var retrofit: Retrofit): GroupData
     override suspend fun getMyGroups(name: String): Response<List<GroupDto>> =
         try{
             retrofitGroupService.getMyGroups(name)
+        }catch (e:Exception){
+            Log.e("ERROR", "Error create GroupDataSourceImpl")
+            Response.error(
+                400,
+                ResponseBody.create(MediaType.parse("text/plain"), e.toString())
+            )
+        }
+
+    override suspend fun getAllGroups(): Response<List<GroupDto>> =
+        try{
+            retrofitGroupService.getAllGroups()
         }catch (e:Exception){
             Log.e("ERROR", "Error create GroupDataSourceImpl")
             Response.error(

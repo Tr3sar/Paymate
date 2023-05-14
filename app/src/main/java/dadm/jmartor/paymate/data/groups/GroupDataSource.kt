@@ -16,4 +16,6 @@ interface GroupDataSource {
     suspend fun addUser (groupId: Long, name: String) : Response<Unit>
 
     suspend fun getMyGroups(name: String) : Response<List<GroupDto>>
+
+    suspend fun getAllGroups() : Response<List<GroupDto>>
 }

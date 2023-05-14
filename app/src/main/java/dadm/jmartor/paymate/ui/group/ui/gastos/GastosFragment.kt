@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.FragmentGastosBinding
 import dadm.jmartor.paymate.ui.newgasto.NewExpenseActivity
+import dadm.jmartor.paymate.ui.newgroup.NewGroupActivity
 import dadm.jmartor.paymate.ui.register.RegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
 

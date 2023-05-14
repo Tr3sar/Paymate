@@ -1,6 +1,7 @@
 package dadm.jmartor.paymate.data.groups
 
 import dadm.jmartor.paymate.data.ConnectivityChecker
+import dadm.jmartor.paymate.data.groups.model.GroupDto
 import dadm.jmartor.paymate.data.groups.model.toDomainList
 import dadm.jmartor.paymate.data.users.model.toDomainList
 import dadm.jmartor.paymate.data.users.model.toUnitDomain
@@ -48,4 +49,10 @@ class GroupRepositoryImpl @Inject constructor(var dataSource: GroupDataSource, v
             Result.failure(NoInternetException())
         }
 
+    override suspend fun getAllGroups(): Result<List<Group>> =
+        if (connectivityChecker.isConnectionAvailable()) {
+            dataSource.getAllGroups().toDomainList()
+        } else {
+            Result.failure(NoInternetException())
+        }
 }
