@@ -62,6 +62,14 @@ class DeudasFragment : Fragment(R.layout.fragment_deudas) {
                 }
             }
         }
+
+        binding.swipeToRefresh.setOnRefreshListener {
+            viewModel.getDebtsList(groupId)
+        }
+
+        viewModel.iconoVisible.observe(viewLifecycleOwner) {iconoVisible ->
+            binding.swipeToRefresh.isRefreshing = iconoVisible
+        }
     }
 
     override fun onDestroyView() {

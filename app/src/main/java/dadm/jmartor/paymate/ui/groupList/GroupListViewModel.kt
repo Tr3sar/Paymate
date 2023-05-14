@@ -21,12 +21,15 @@ class GroupListViewModel @Inject() constructor(
 ): ViewModel() {
 
     private val group_List: MutableLiveData<List<Group>> = MutableLiveData<List<Group>>()
+    private val _iconoVisible: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
 
-
-val groupList: LiveData<List<Group>> get() = group_List
+    val iconoVisible: LiveData<Boolean> get() = _iconoVisible
+    val groupList: LiveData<List<Group>> get() = group_List
 
 
 fun getGroupList() {
+    _iconoVisible.value = true
+
     val paymateApplication = application as PaymateApplication
     val name = paymateApplication.username
 
@@ -38,6 +41,8 @@ fun getGroupList() {
 
         })
     }
+
+    _iconoVisible.value = false
 }
 
 }
