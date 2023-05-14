@@ -1,12 +1,9 @@
 package dadm.jmartor.paymate.data.users
 
 import dadm.jmartor.paymate.data.ConnectivityChecker
-import dadm.jmartor.paymate.data.users.model.toDomain
-import dadm.jmartor.paymate.data.users.model.toDoubleDomain
-import dadm.jmartor.paymate.data.users.model.toUnitDomain
+import dadm.jmartor.paymate.data.users.model.*
 import dadm.jmartor.paymate.model.User
 import dadm.jmartor.paymate.utils.NoInternetException
-import retrofit2.Response
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
@@ -40,6 +37,13 @@ class UserRepositoryImpl @Inject constructor(
     ): Result<Unit> =
         if (connectivityChecker.isConnectionAvailable()) {
             dataSource.payDebt(username, idGroup, quantity).toUnitDomain()
+        } else {
+            Result.failure(NoInternetException())
+        }
+
+    override suspend fun getAllUsers(): Result<List<User>> =
+        if (connectivityChecker.isConnectionAvailable()) {
+            dataSource.getAllUsers().toDomainList()
         } else {
             Result.failure(NoInternetException())
         }

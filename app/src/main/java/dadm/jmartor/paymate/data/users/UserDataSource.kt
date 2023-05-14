@@ -11,4 +11,6 @@ interface UserDataSource {
     suspend fun getDebt(username: String, idGroup: Long) : Response<Double>
 
     suspend fun payDebt(username: String, idGroup: Long, quantity: Double) : Response<Unit>
+
+    suspend fun getAllUsers() : Response<List<UserDto>>
 }

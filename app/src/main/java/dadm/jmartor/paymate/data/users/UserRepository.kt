@@ -1,7 +1,6 @@
 package dadm.jmartor.paymate.data.users
 
 import dadm.jmartor.paymate.model.Debt
-import retrofit2.Response
 import dadm.jmartor.paymate.model.User
 
 interface UserRepository {
@@ -12,4 +11,7 @@ interface UserRepository {
     suspend fun getDebt(username: String, idGroup: Long) : Result<Double>
 
     suspend fun payDebt(username: String, idGroup: Long, quantity: Double) : Result<Unit>
+
+    suspend fun getAllUsers(): Result<List<User>>
+
 }

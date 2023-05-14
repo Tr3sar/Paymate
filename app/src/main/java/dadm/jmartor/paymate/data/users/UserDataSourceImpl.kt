@@ -32,6 +32,9 @@ class UserDataSourceImpl @Inject constructor(var retrofit: Retrofit) : UserDataS
             @Query("groupId") idGroup: Long,
             @Query("money") quantity: Double
         ) : Response<Unit>
+
+        @GET("user/all")
+        suspend fun getAllUsers() : Response<List<UserDto>>
     }
 
     override suspend fun login(username: String, password: String): Response<UserDto> =
@@ -79,6 +82,17 @@ class UserDataSourceImpl @Inject constructor(var retrofit: Retrofit) : UserDataS
             retrofitUserService.payDebt(username, idGroup, quantity)
         } catch (e: Exception) {
             Log.e("ERROR", "Error payDebt UserDataSourceImpl")
+            Response.error(
+                400,
+                ResponseBody.create(MediaType.parse("text/plain"), e.toString())
+            )
+        }
+
+    override suspend fun getAllUsers(): Response<List<UserDto>> =
+        try{
+            retrofitUserService.getAllUsers()
+        }catch (e:Exception){
+            Log.e("ERROR", "Error create UserDataSourceImpl")
             Response.error(
                 400,
                 ResponseBody.create(MediaType.parse("text/plain"), e.toString())

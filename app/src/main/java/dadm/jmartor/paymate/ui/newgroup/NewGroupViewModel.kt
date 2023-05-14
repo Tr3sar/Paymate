@@ -8,14 +8,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dadm.jmartor.paymate.PaymateApplication
 import dadm.jmartor.paymate.data.groups.GroupRepository
+import dadm.jmartor.paymate.data.users.UserRepository
 import dadm.jmartor.paymate.model.Group
+import dadm.jmartor.paymate.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
-class NewGroupViewModel @Inject constructor(@ApplicationContext private val application: Context, val groupRepository: GroupRepository):ViewModel(){
+class NewGroupViewModel @Inject constructor(@ApplicationContext private val application: Context, val groupRepository: GroupRepository, val userRepository: UserRepository):ViewModel(){
 
     private val _members: MutableLiveData<String> = MutableLiveData<String>()
     val members : LiveData<String>
@@ -79,6 +82,17 @@ class NewGroupViewModel @Inject constructor(@ApplicationContext private val appl
                 _containsErrors.value = it
             })
         }
+    }
+
+    fun getAllUsers(): List<User> {
+        var listUsers: List<User> = ArrayList<User>()
+        runBlocking {
+            val job = launch {
+                listUsers = userRepository.getAllUsers().getOrNull()!!
+            }
+            job.join()
+        }
+        return listUsers
     }
 
     fun resetError() {

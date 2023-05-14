@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
 import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.ActivityNewGroupBinding
+import dadm.jmartor.paymate.model.User
 import dadm.jmartor.paymate.utils.NoInternetException
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +16,7 @@ class NewGroupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewGroupBinding
     private val viewModel: NewGroupViewModel by viewModels()
-    private var listMembers: List<String> = ArrayList<String>()
+    private var listMembers: List<User> = ArrayList<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +29,22 @@ class NewGroupActivity : AppCompatActivity() {
 
         binding.addMember.setOnClickListener {
             var member: String = binding.personName.text.toString()
-            viewModel.setMembers(member + "\n")
-            binding.members.text = viewModel.members.value
-            viewModel.addMembersToList(member)
-            binding.personName.text.clear()
+            var isUser: Boolean = false
+            listMembers = viewModel.getAllUsers()
+
+            for (user: User in listMembers){
+                Log.e("EEEEEEEEEEEEEEEEEEEEEEEE", "yeeee")
+                if (user.username==member){
+                    isUser = true
+                }
+            }
+
+            if(isUser){
+                viewModel.setMembers(member + "\n")
+                binding.members.text = viewModel.members.value
+                viewModel.addMembersToList(member)
+                binding.personName.text.clear()
+            }
         }
 
         binding.createGroup.setOnClickListener {
