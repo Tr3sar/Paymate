@@ -1,6 +1,6 @@
 package dadm.jmartor.paymate.data.groups
 
-import dadm.jmartor.paymate.ui.domain.model.User
+import dadm.jmartor.paymate.model.User
 
 import dadm.jmartor.paymate.model.Expense
 import dadm.jmartor.paymate.model.Group

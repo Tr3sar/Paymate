@@ -5,7 +5,7 @@ import dadm.jmartor.paymate.data.groups.model.toDomainList
 import dadm.jmartor.paymate.data.users.ConnectivityChecker
 import dadm.jmartor.paymate.data.users.model.toDomainList
 import dadm.jmartor.paymate.data.users.model.toUnitDomain
-import dadm.jmartor.paymate.ui.domain.model.User
+import dadm.jmartor.paymate.model.User
 import dadm.jmartor.paymate.model.Expense
 import dadm.jmartor.paymate.model.Group
 import dadm.jmartor.paymate.utils.NoInternetException
