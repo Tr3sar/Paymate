@@ -1,7 +1,7 @@
 package dadm.jmartor.paymate.data.groups
 
 import android.util.Log
-import dadm.jmartor.paymate.data.groups.model.ExpenseDto
+import dadm.jmartor.paymate.data.expenses.model.ExpenseDto
 import dadm.jmartor.paymate.data.groups.model.GroupDto
 import dadm.jmartor.paymate.data.users.model.UserDto
 import okhttp3.MediaType

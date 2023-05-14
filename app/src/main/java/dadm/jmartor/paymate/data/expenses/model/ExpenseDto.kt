@@ -1,4 +1,4 @@
-package dadm.jmartor.paymate.data.groups.model
+package dadm.jmartor.paymate.data.expenses.model
 
 import com.squareup.moshi.JsonClass
 

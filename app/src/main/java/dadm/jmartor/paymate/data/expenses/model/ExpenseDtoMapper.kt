@@ -1,6 +1,5 @@
-import dadm.jmartor.paymate.data.groups.model.ExpenseDto
+import dadm.jmartor.paymate.data.expenses.model.ExpenseDto
 import dadm.jmartor.paymate.model.Expense
-import dadm.jmartor.paymate.model.Group
 import retrofit2.Response
 import java.io.IOException
 
