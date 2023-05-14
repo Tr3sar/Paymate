@@ -6,4 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".ui.newgasto.NewExpenseActivity">
 
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="24sp"
+        android:text="@string/create_expense"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvExpenseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="140dp"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:text="@string/create_expense_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <EditText
+        android:id="@+id/etExpenseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/create_expense_title_hint"
+        android:inputType="textPersonName"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+
+    <TextView
+        android:id="@+id/tvExpenseQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:text="@string/create_expense_quantity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvExpenseTitle" />
+
+    <EditText
+        android:id="@+id/etExpenseQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/expense_quantity_hint"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etExpenseTitle" />
+
+
+    <Button
+        android:id="@+id/btn_crear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        android:text="@string/btn_crear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
