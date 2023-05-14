@@ -1,38 +1,62 @@
 package dadm.jmartor.paymate.ui.group.ui.deudas
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import com.google.android.material.snackbar.Snackbar
+import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.FragmentDeudasBinding
+import dadm.jmartor.paymate.ui.pagardeuda.PagarDeudaActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DeudasFragment : Fragment() {
+class DeudasFragment : Fragment(R.layout.fragment_deudas) {
 
     private var _binding: FragmentDeudasBinding? = null
 
     private val binding get() = _binding!!
 
-    private val viewModel: DeudasViewModel by viewModels()
+    private val viewModel: DeudasViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentDeudasBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textNotifications
-        viewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    private val itemClicked = object : ItemClicked {
+        override fun onClick() {
+            Snackbar.make(binding.root, "No ha sido implementado aún", Snackbar.LENGTH_SHORT).show()
         }
-        return root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        _binding = FragmentDeudasBinding.bind(view)
+
+        val adapter = DebtListAdapter(itemClicked)
+        binding.recyclerViewDeudas.adapter = adapter
+
+        viewModel.getDebtsList(1, "Bob")
+
+        viewModel.debtList.observe(viewLifecycleOwner) {debtList ->
+            adapter.submitList(debtList)
+        }
+
+        val payDebtButton: Button = view.findViewById(R.id.payDebtButton)
+
+        viewModel.userDebt.observe(viewLifecycleOwner) {userDebt ->
+            if (userDebt == null || userDebt.quantity <= 0) {
+                payDebtButton.isEnabled = false
+            } else {
+                payDebtButton.isEnabled = true
+                payDebtButton.setOnClickListener {
+                    val intent = Intent(activity, PagarDeudaActivity::class.java)
+                    intent.putExtra("username", "Bob")
+                    intent.putExtra("groupId", 1L)
+                    intent.putExtra("groupName", "grupo 1")
+                    intent.putExtra("quantity", userDebt.quantity)
+                    startActivity(intent)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

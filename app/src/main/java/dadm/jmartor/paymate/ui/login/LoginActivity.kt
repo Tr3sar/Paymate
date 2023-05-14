@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.ActivityLoginBinding
 import dadm.jmartor.paymate.ui.group.GrupoActivity
+import dadm.jmartor.paymate.ui.groupList.GroupListActivity
 import dadm.jmartor.paymate.ui.register.RegisterActivity
 import dadm.jmartor.paymate.utils.NoInternetException
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.loginResult.observe(this) { loginResult ->
             if (loginResult) {
-                val intent = Intent(this, GrupoActivity::class.java)
+                val intent = Intent(this, GroupListActivity::class.java)
                 startActivity(intent)
 
                 Snackbar.make(binding.root, "Login correcto", Snackbar.LENGTH_SHORT).show()
