@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import com.google.android.material.snackbar.Snackbar
 import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.ActivityNewGroupBinding
+import dadm.jmartor.paymate.utils.NoInternetException
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,6 +40,37 @@ class NewGroupActivity : AppCompatActivity() {
             binding.members.text = ""
             viewModel.resetMembers()
             binding.groupName.text.clear()
+        }
+
+        viewModel.containsErrors.observe(this) {error ->
+            if (error != null) {
+                when (error) {
+                    is NoInternetException -> {
+                        Snackbar.make(
+                            binding.root,
+                            R.string.internetException,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                    else -> {
+                        Snackbar.make(
+                            binding.root,
+                            R.string.create_expense_error,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                viewModel.resetError()
+            }
+        }
+
+        viewModel.createGroupResult.observe(this) {createGroupResult ->
+            if (createGroupResult) {
+                finish()
+            } else {
+                Snackbar.make(binding.root, "Ha ocurrido un error inesperado, vuelve a intentarlo más tarde.", Snackbar.LENGTH_SHORT).show()
+            }
         }
     }
 }
