@@ -6,4 +6,6 @@ interface ExpenseDataSource {
     suspend fun create(title: String, quantity: Double) : Response<Unit>
 
     suspend fun addUsersFromGroupToExpense(groupId: Long, expenseId: Long) : Response<Unit>
+
+    suspend fun getExpensesSize() : Response<Int>
 }

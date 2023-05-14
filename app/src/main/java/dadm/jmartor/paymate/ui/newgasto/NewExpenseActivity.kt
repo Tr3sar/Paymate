@@ -2,6 +2,7 @@ package dadm.jmartor.paymate.ui.newgasto
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
 import dadm.jmartor.paymate.R
@@ -21,6 +22,9 @@ class NewExpenseActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        val extras = intent.extras!!
+        val groupId : Long = extras.getLong("groupId")
+
         binding.btnCrear.setOnClickListener() {
             val title = binding.etExpenseTitle.text.toString()
             val quantity = binding.etExpenseQuantity.text.toString().toDouble()
@@ -30,12 +34,13 @@ class NewExpenseActivity : AppCompatActivity() {
             } else if (quantity.isNaN()) {
                 Snackbar.make(binding.root, "La cantidad debe ser un número", Snackbar.LENGTH_SHORT).show()
             } else {
-                viewModel.createExpense(title, quantity)
+                viewModel.createExpense(title, quantity, groupId)
             }
         }
 
         viewModel.createExpenseResult.observe(this) {createExpenseResult ->
             if (createExpenseResult) {
+                Snackbar.make(binding.root, "Se ha creado correctamente", Snackbar.LENGTH_SHORT).show()
                 finish()
             } else {
                 Snackbar.make(binding.root, "Ha ocurrido un error inesperado, vuelve a intentarlo más tarde.", Snackbar.LENGTH_SHORT).show()

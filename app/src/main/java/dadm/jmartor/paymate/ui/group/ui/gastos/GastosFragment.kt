@@ -52,6 +52,8 @@ class GastosFragment : Fragment(R.layout.fragment_gastos) {
         //newExpense
         binding.btnAdd.setOnClickListener() {
             val intent = Intent(activity, NewExpenseActivity::class.java)
+            intent.putExtra("expensesSize", viewModel.expensesList.value?.size)
+            intent.putExtra("groupId", groupId)
             startActivity(intent)
         }
 
