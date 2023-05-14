@@ -1,6 +1,6 @@
 package dadm.jmartor.paymate.data.users.model
 
-import dadm.jmartor.paymate.ui.domain.model.User
+import dadm.jmartor.paymate.model.User
 import retrofit2.Response
 import java.io.IOException
 

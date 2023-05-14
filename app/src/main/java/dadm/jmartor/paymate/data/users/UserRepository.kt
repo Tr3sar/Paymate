@@ -3,6 +3,7 @@ package dadm.jmartor.paymate.data.users
 import dadm.jmartor.paymate.model.Debt
 import dadm.jmartor.paymate.ui.domain.model.User
 import retrofit2.Response
+import dadm.jmartor.paymate.model.User
 
 interface UserRepository {
     suspend fun login(username: String, password: String): Result<User>

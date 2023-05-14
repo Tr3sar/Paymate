@@ -8,12 +8,12 @@
     <fragment
         android:id="@+id/navigation_gastos"
         android:name="dadm.jmartor.paymate.ui.group.ui.gastos.GastosFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_gastos"
         tools:layout="@layout/fragment_gastos" />
 
     <fragment
         android:id="@+id/navigation_deudas"
         android:name="dadm.jmartor.paymate.ui.group.ui.deudas.DeudasFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_deudas"
         tools:layout="@layout/fragment_deudas" />
 </navigation>

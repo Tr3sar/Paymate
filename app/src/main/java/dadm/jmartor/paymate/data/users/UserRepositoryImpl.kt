@@ -3,11 +3,10 @@ package dadm.jmartor.paymate.data.users
 import dadm.jmartor.paymate.data.users.model.toDomain
 import dadm.jmartor.paymate.data.users.model.toDoubleDomain
 import dadm.jmartor.paymate.data.users.model.toUnitDomain
-import dadm.jmartor.paymate.ui.domain.model.User
+import dadm.jmartor.paymate.model.User
 import dadm.jmartor.paymate.utils.NoInternetException
 import retrofit2.Response
 import javax.inject.Inject
-import javax.sql.DataSource
 
 class UserRepositoryImpl @Inject constructor(
     var dataSource: UserDataSource, var connectivityChecker: ConnectivityChecker) : UserRepository {

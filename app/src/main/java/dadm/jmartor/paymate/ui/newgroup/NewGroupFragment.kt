@@ -27,6 +27,11 @@ class NewGroupFragment : Fragment(R.layout.fragment_new_group) {
             binding.members.text = members + member + "\n"
             listMembers.plus(member)
         }
+
+        binding.createGroup.setOnClickListener {
+            viewModel.create(binding.groupName.text.toString(), listMembers)
+            listMembers = emptyList()
+        }
     }
 
     override fun onDestroyView() {
