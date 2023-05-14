@@ -11,3 +11,10 @@ fun Response<List<ExpenseDto>>.toDomainList() =
         Result.success(expenseList)
     }
     else Result.failure(IOException())
+
+fun Response<Int>.toDomain() =
+    if (isSuccessful) {
+        Result.success(body() as Int)
+    } else {
+        Result.failure(IOException())
+    }

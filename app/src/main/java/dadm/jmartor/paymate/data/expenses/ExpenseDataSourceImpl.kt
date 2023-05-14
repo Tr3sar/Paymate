@@ -9,6 +9,7 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Query
@@ -20,6 +21,9 @@ class ExpenseDataSourceImpl @Inject() constructor(var retrofit: Retrofit) : Expe
     interface ExpenseRetrofit {
         @POST("expense")
         suspend fun create(@Body expenseDto: ExpenseDto): Response<Unit>
+
+        @GET("expense/all")
+        suspend fun getAllExpenses() : Response<List<ExpenseDto>>
 
         @PUT("expense/add_users")
         suspend fun addUsersFromGroupToExpense(
@@ -33,6 +37,17 @@ class ExpenseDataSourceImpl @Inject() constructor(var retrofit: Retrofit) : Expe
             retrofitExpenseService.create(expense)
         }catch (e:Exception){
             Log.e("ERROR", "Error create ExpenseDataSourceImpl")
+            Response.error(
+                400,
+                ResponseBody.create(MediaType.parse("text/plain"), e.toString())
+            )
+        }
+
+    override suspend fun getExpensesSize() : Response<Int> =
+        try{
+            Response.success(retrofitExpenseService.getAllExpenses().body()?.size)
+        } catch (e: Exception) {
+            Log.e("ERROR", "Error getSize ExpenseDataSourceImpl")
             Response.error(
                 400,
                 ResponseBody.create(MediaType.parse("text/plain"), e.toString())

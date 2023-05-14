@@ -19,11 +19,16 @@ class NewExpenseViewModel @Inject() constructor(
     val createExpenseResult: LiveData<Boolean> get() = _createExpenseResult
     val containsErrors: LiveData<Throwable?> get() = _containsErrors
 
-    fun createExpense(title: String, quantity: Double) {
+    fun createExpense(title: String, quantity: Double, groupId: Long) {
         viewModelScope.launch {
             expenseRepository.create(title, quantity).fold(onSuccess = {
-                expenseRepository.addUsersFromGroupToExpense(1, 6).fold(onSuccess = {
-                    _createExpenseResult.value = true
+                expenseRepository.getExpensesSize().fold(onSuccess = {
+                    expenseRepository.addUsersFromGroupToExpense(groupId, it.toLong()).fold(onSuccess = {
+                        _createExpenseResult.value = true
+                    }, onFailure = {
+                        _createExpenseResult.value = false
+                        _containsErrors.value = it
+                    })
                 }, onFailure = {
                     _createExpenseResult.value = false
                     _containsErrors.value = it
