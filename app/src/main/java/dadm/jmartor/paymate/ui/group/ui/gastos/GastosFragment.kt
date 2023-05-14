@@ -1,5 +1,6 @@
 package dadm.jmartor.paymate.ui.group.ui.gastos
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import dadm.jmartor.paymate.R
 import dadm.jmartor.paymate.databinding.FragmentGastosBinding
+import dadm.jmartor.paymate.ui.newgasto.NewExpenseActivity
+import dadm.jmartor.paymate.ui.register.RegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,6 +43,12 @@ class GastosFragment : Fragment(R.layout.fragment_gastos) {
 
         viewModel.expensesList.observe(viewLifecycleOwner) {expenseList ->
             adapter.submitList(expenseList)
+        }
+
+        //newExpense
+        binding.btnAdd.setOnClickListener() {
+            val intent = Intent(activity, NewExpenseActivity::class.java)
+            startActivity(intent)
         }
 
         //refresh

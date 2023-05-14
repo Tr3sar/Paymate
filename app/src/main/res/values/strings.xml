@@ -20,4 +20,5 @@
     <string name="group_create_button">Crear grupo</string>
     <string name="title_deudas">Deudas</string>
     <string name="title_gastos">Gastos</string>
+    <string name="btn_add_description">Botón para añadir gastos</string>
 </resources>
