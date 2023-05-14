@@ -48,6 +48,15 @@ class GroupListActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //refresh
+        binding.swipeToRefresh.setOnRefreshListener() {
+            viewModel.getGroupList()
+        }
+
+        viewModel.iconoVisible.observe(this) { iconoVisible ->
+            binding.swipeToRefresh.isRefreshing = iconoVisible
+        }
+
 
     }
 }
